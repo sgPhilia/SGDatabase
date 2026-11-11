@@ -1,10 +1,10 @@
-# LearnDatabase
+# SGDatabase — LearnDatabase Textbook
 
-LearnDatabase is a research-backed, university-level textbook project for understanding database systems and the engineering choices behind them. It is intended to read as a collection of technical books, not a set of short tutorials. It pairs detailed theory with practical experiments, with Rust (Edition 2024) as the primary implementation language and C++ as an occasional comparison.
+SGDatabase is the repository for LearnDatabase: a research-backed, university-level textbook and practical engineering knowledge base for understanding database systems and the engineering choices behind them. It is intended to read as a collection of technical books, not a set of short tutorials. It pairs detailed theory with practical experiments, with Rust Edition 2024 as the primary implementation language and C++ as an occasional comparison.
 
 ## Current state
 
-The initial repository assessment is complete, and the textbook-scale structure and standards are now established. Volume I begins with a chapter on what data and database systems are. See [PROGRESS.md](PROGRESS.md) for current status and [ROADMAP.md](ROADMAP.md) for the proposed sequence.
+The initial repository assessment is complete, the textbook-scale structure is established, and Volume I is underway. Read [AI_CONTEXT.md](AI_CONTEXT.md) to resume work, [SESSION_HANDOFF.md](SESSION_HANDOFF.md) for the next action, and [PROGRESS.md](PROGRESS.md) for high-level status.
 
 ## Learning approach
 
@@ -24,15 +24,16 @@ The path begins with computer and data foundations, proceeds through relational 
 - `research/` — source studies and research notes, organized by source type.
 - `references/` — curated reading path and structured research catalog.
 - `diagrams/` — editable Mermaid diagrams used by the curriculum.
-- `ROADMAP.md`, `PROGRESS.md`, `RESEARCH.md`, `SUMMARY.md` — project planning, status, research method, and concise project knowledge map.
+- `AI_CONTEXT.md`, `PROJECT_STATE.md`, `SESSION_HANDOFF.md`, `TODO.md`, `WORK_LOG.md`, `DECISIONS.md`, `CHAPTER_STATUS.md`, `RESEARCH_INDEX.md`, `QUALITY_REPORT.md` — persistent project memory and operational records.
+- `ROADMAP.md`, `PROGRESS.md`, `RESEARCH.md`, `SUMMARY.md` — authoritative plan, high-level status, research method, and project overview.
 
 The first textbook chapter is in `docs/volume-01-foundations/`. The remaining structure will be added as substantive chapters are approved; empty chapter placeholders are not used.
 
 ## Start here
 
-1. Read [ROADMAP.md](ROADMAP.md) for the proposed curriculum, technical dependencies, milestones, and initial task breakdown.
-2. Read [RESEARCH.md](RESEARCH.md) for the assessment of the supplied report, source limitations, and verification policy.
-3. Read [PROGRESS.md](PROGRESS.md) for explicit current statuses and open decisions.
+1. Read [AI_CONTEXT.md](AI_CONTEXT.md) and [SESSION_HANDOFF.md](SESSION_HANDOFF.md) to resume.
+2. Read [PROJECT_STATE.md](PROJECT_STATE.md), [TODO.md](TODO.md), and [CHAPTER_STATUS.md](CHAPTER_STATUS.md) for actual state and work queue.
+3. Read [ROADMAP.md](ROADMAP.md) for planned scope and [RESEARCH_INDEX.md](RESEARCH_INDEX.md) for source records.
 
 ## Scope and quality
 

@@ -4,7 +4,9 @@
 **Part:** I — Data and Computing  
 **Status:** COMPLETED  
 **Prerequisites:** None  
-**Next:** V01-C02 — Information, Representation, and Meaning (planned)
+**Next:** [V01-C02 — Meaning, Models, and Information](V01-C02-meaning-models-information.md)
+**Glossary:** [Canonical terms](../../../glossary.md)  
+**Concept index:** [Index](../../../INDEX.md)
 
 ## Learning objectives
 

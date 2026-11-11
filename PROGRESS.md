@@ -1,58 +1,49 @@
 # Project Progress
 
-Last updated: 2026-11-11
+Last updated: 2026-11-11 (Asia/Bangkok)
 
 ## Overall status
 
-**Project phase:** Phase 2 — Textbook Curriculum Development  
-**Phase status:** IN PROGRESS  
-**Overall completion:** 1 of approximately 130–175 planned textbook chapters complete; implementation remains 0%.
+**Project phase:** Initial Assignment — repository assessment, architecture, and execution roadmap  
+**Phase status:** COMPLETED; awaiting owner approval to begin the next phase  
+**Completed chapters:** 5 of 11 currently chapterized; V01-C06 is DRAFT. The roadmap's 130–175 figure is a broad scope estimate, not an exact chapter denominator.  
+**Database implementation:** NOT STARTED.
 
-The scope estimate is provisional and described in `ROADMAP.md`; it is not a quota or cap. Chapter counts exclude volume guides, glossary/index entries, labs, and solution materials. Percentages track substantive learning and engineering work, not planning documents or word count.
+Exact registry counts are maintained in [CHAPTER_STATUS.md](CHAPTER_STATUS.md); persistent detailed state is in [PROJECT_STATE.md](PROJECT_STATE.md). Do not calculate progress from document length.
 
-## Initial assignment
+## Workstreams
 
-| Deliverable | Status | Notes |
+| Workstream | Status | Notes |
 |---|---|---|
-| Project and repository assessment | COMPLETED | Directory inventory and repository metadata checked; there is no usable Git repository or source tree. |
-| Research assessment | COMPLETED | Supplied eight-page research plan read; quality limits and verification needs documented in `RESEARCH.md`. |
-| Textbook-scale repository architecture and volume plan | COMPLETED | Revised to volumes, parts, numbered chapters, cross-references, glossary/index, and parallel implementation materials. |
-| Curriculum blueprint and dependency map | COMPLETED | Proposed in `ROADMAP.md`; theory and engineering tracks remain linked. |
-| Chapter completion standard | COMPLETED | Measurable review criteria are defined in `ROADMAP.md`. |
-| Research reference structure and documentation standards | COMPLETED | Expanded to textbook depth, claim evidence, version context, and chapter review criteria. |
-| Initial README | COMPLETED | Describes the project and current state. |
-| Revised ROADMAP | COMPLETED | Reflects clarified textbook vision and proposed multi-volume sequence. |
-| First fundamentals chapter | COMPLETED | V01-C01 drafted with historical context, concepts, worked trace, diagram, experiment, misconceptions, and source-supported claims. |
-| Progress tracking system | COMPLETED | Status vocabulary and rules established here. |
+| Repository assessment and foundation | COMPLETED | Existing files and Git metadata inspected; see `RESEARCH.md` and `WORK_LOG.md`. |
+| Textbook architecture and standards | COMPLETED | Multi-volume structure, chapter criteria, research policy established. |
+| Volume I foundations | IN PROGRESS | V01-C01 through C05 complete; C06 draft. |
+| Relational modeling and theory | NOT STARTED | Follows foundations. |
+| SQL and database use | NOT STARTED | Follows data modeling. |
+| Architecture, storage, indexes | NOT STARTED | Follows fundamentals and relational model. |
+| Query processing and optimization | NOT STARTED | Prerequisites in relational algebra, SQL and architecture. |
+| Transactions, concurrency and recovery | NOT STARTED | Later theory volumes. |
+| Distributed and advanced topics | NOT STARTED | Requires foundations in systems and transactions. |
+| Rust engineering track | NOT STARTED | Starts after corresponding concepts and milestone specs. |
+| Real-system studies | IN PROGRESS | Initial spot checks only; full research catalog is not assembled. |
 
-## Work status
+## Repository status at latest inspection
 
-| Workstream | Status | Completion |
-|---|---|---:|
-| Repository foundation and assessment | COMPLETED | Initial assessment and textbook-scale design documented |
-| Fundamentals and relational theory | IN PROGRESS | 1 chapter complete; remaining chapters not started |
-| SQL and data modeling | NOT STARTED | 0% |
-| Architecture, storage, and indexes | NOT STARTED | 0% |
-| Query processing and optimization | NOT STARTED | 0% |
-| Transactions, concurrency, and recovery | NOT STARTED | 0% |
-| Distributed and advanced topics | NOT STARTED | 0% |
-| Rust implementation track | NOT STARTED | 0% |
-| Real-system studies | NOT STARTED | 0% |
-| Reference catalog verification | IN PROGRESS | Four core sources have verified direct records; broader catalog not yet built |
-
-## Open items
-
-- Continue the textbook from V01-C02, preserving prerequisite order and the chapter acceptance standard.
-- Build an authoritative, directly linked reference catalog; the supplied report has incomplete bibliographic data and malformed/non-specific links.
-- Decide whether to initialize Git metadata. No Git metadata was available during assessment; no Git repository was initialized.
-- Verify version-sensitive system claims against current official documentation when each system study is scheduled.
+- Git branch: `main`, tracking `origin/main`.
+- Recent commits: `a658185 Add gitignore for research files`; `55a8043 Initial commit`.
+- Working tree was clean before the current session's edits.
+- No implementation crates, labs, or pre-existing reference index were present.
 
 ## Status definitions
 
 - **NOT STARTED** — no work has begun.
-- **IN PROGRESS** — work has begun and is not complete.
-- **BLOCKED** — progress requires an external decision, resource, or dependency.
-- **COMPLETED** — acceptance criteria are met and relevant checks are recorded.
-- **NEEDS REVIEW** — a concrete proposal or deliverable is ready for owner review.
+- **IN PROGRESS** — active work exists but acceptance is incomplete.
+- **DRAFT** — a substantial first draft exists and needs review.
+- **NEEDS RESEARCH** — the content depends on missing or unverified evidence.
+- **NEEDS REVIEW** — content is ready for focused editorial/technical review.
+- **BLOCKED** — progress requires an external decision or resource.
+- **COMPLETED** — acceptance criteria are met and checks are recorded.
 
-Completion percentages count accepted deliverables or defined work items, never word count or projected effort. Items are marked COMPLETED only when their stated acceptance criteria are met.
+## Current priorities
+
+See [TODO.md](TODO.md) for actionable tasks. The next development phase is gated on owner approval. After approval, continue in prerequisite order from Volume I. Verify claims with primary sources and record checks in `QUALITY_REPORT.md`.

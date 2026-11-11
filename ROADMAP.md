@@ -74,11 +74,11 @@ SQL is its own learning stage, but query plans and transaction semantics recur l
 
 The hierarchy below is the working table of contents. Chapter groupings may be split when a subject needs its own derivation or algorithm treatment. Numbering is stable within each volume; a chapter is added only when it has real content. This is an estimate of scope, not a publication quota.
 
-### Volume I — Data, Computing, and Database Foundations (8–10 chapters)
+### Volume I — Data, Computing, and Database Foundations (11 chapters)
 
-Part I: Data and computation — 1. What Data Is; 2. Information, Representation, and Meaning; 3. Bits, Bytes, Types, and Encodings; 4. Files, Memory, and Persistent Storage; 5. Programs, Processes, and Client–Server Basics.
+Part I: Data and computation — V01-C01 What Is Data?; V01-C02 Meaning, Models, and Information; V01-C03 Information Theory: Uncertainty, Entropy, and Coding; V01-C04 Bits, Bytes, Types, and Encodings; V01-C05 Files, Memory, and Persistent Storage; V01-C06 Programs, Processes, and Client–Server Basics.
 
-Part II: Database systems — 6. What Is a Database?; 7. What Is a DBMS and Why Use One?; 8. Files and Application-Managed Data vs DBMS; 9. Database Workloads and System Families; 10. A First Map of a Database System.
+Part II: Database systems — V01-C07 What Is a Database?; V01-C08 What Is a DBMS and Why Use One?; V01-C09 Files and Application-Managed Data vs DBMS; V01-C10 Database Workloads and System Families; V01-C11 A First Map of a Database System.
 
 ### Volume II — Data Modeling and Relational Theory (10–14 chapters)
 
@@ -132,7 +132,7 @@ One chapter per implementation milestone in the engineering roadmap below, with 
 
 ### Chapter numbering and cross-reference conventions
 
-Use volume-prefixed identifiers (`V01-C01`) as stable references even if filenames change. Use descriptive filenames with the ID, e.g. `V01-C01-what-is-data.md`. Volume and part landing pages list chapter titles, prerequisites, status, and next steps. Chapters link to prerequisite concepts, glossary entries, related engineering milestones, and references. The glossary uses one canonical entry per term; alternate names point to it. The concept index maps terms, algorithms, systems, and symbols to chapter anchors. Mathematical notation is introduced in a notation note and defined locally when first used. Mermaid diagrams and pseudocode remain text-based and have accompanying prose explanations.
+Use volume-prefixed identifiers (`V01-C01`) as stable references even if filenames change. Use descriptive filenames with the ID, e.g. `V01-C01-what-is-data.md`. Volume and part landing pages list chapter titles, prerequisites, status, and next steps. Chapters link to prerequisite concepts, glossary entries, related engineering milestones, and references. The glossary uses one canonical entry per term; alternate names point to it. The concept index maps terms, algorithms, systems, and symbols to chapter anchors. Mathematical notation is introduced in a notation note and defined locally when first used; use GitHub-compatible display math delimited with `$$`. Mermaid diagrams and pseudocode remain text-based and have accompanying prose explanations.
 
 ### Measurable complete-chapter standard
 
@@ -186,30 +186,33 @@ Milestones are deliberately gated by the theory that makes their correctness que
 | 1 | In-memory key-value store | Rust basics, collections, error handling; get/put/delete with explicit semantics |
 | 2 | Persistent key-value store | File I/O, encoding, failure boundaries; reopen and recover stored values |
 | 3 | Record storage | Types, serialization, record identifiers; encode/decode records with validation |
-| 4 | Page-based storage and page layout | Blocks, offsets, page invariants; page file and slotted-page operations |
-| 5 | Buffer pool | Page I/O, pin/latch distinction, replacement; bounded frames with observable eviction behavior |
-| 6 | Hash index | Hashing, collisions, persistence trade-offs; lookup/update with defined collision handling |
-| 7 | B+ tree | Ordered search, pages, split/merge invariants; range and point lookup across persisted nodes |
-| 8 | Tables and schemas | Catalogs, types, constraints, record/index integration; create and scan a simple table |
-| 9 | SQL lexer and parser | SQL grammar, tokens, ASTs; parse an explicitly scoped SQL subset |
-| 10 | Query executor | Relational operators, tuples, iterators; scan/filter/project and selected joins |
-| 11 | Basic query planner | Logical/physical plans and simple cost inputs; select among a small set of valid plans |
-| 12 | Transaction management | Atomicity/consistency and schedules; transaction state and single-process semantics |
-| 13 | Write-ahead logging | Persistence ordering and log records; enforce log-before-data in the declared model |
-| 14 | Crash recovery | Undo/redo/checkpoint theory; deterministic recovery scenarios and documented limits |
-| 15 | Concurrency control | Locks, deadlocks, isolation anomalies; controlled concurrent transaction schedules |
-| 16 | MVCC | Version chains, snapshots, visibility and cleanup; snapshot reads with defined isolation scope |
-| 17 | Query optimization | Equivalence rules, estimates and plan costs; explainable, scoped rewrites |
-| 18 | Client/server protocol | Framing, errors, resource limits and concurrency; local client and server with protocol tests |
-| 19 | Replication | Failure models, ordering, consensus prerequisites; simulation first, then a scoped protocol experiment |
+| 4 | Page-based storage | Blocks, offsets and page I/O; a page file with defined allocation/read/write behavior |
+| 5 | Page layout and serialization | Page headers, slot directories, encoding and invariants; validate records within pages |
+| 6 | Buffer pool | Page I/O, pin/latch distinction, replacement; bounded frames with observable eviction behavior |
+| 7 | Hash index | Hashing, collisions, persistence trade-offs; lookup/update with defined collision handling |
+| 8 | B+ tree | Ordered search, pages, split/merge invariants; range and point lookup across persisted nodes |
+| 9 | Tables and schemas | Catalogs, types, constraints, record/index integration; create and scan a simple table |
+| 10 | SQL lexer | Character classes and token boundaries; tokenize a defined SQL subset |
+| 11 | SQL parser | Grammar, precedence and errors; parse supported statements deterministically |
+| 12 | Abstract syntax tree | Typed syntax representation and traversal; inspect and transform supported statements |
+| 13 | Query executor | Relational operators, tuples, iterators; scan/filter/project and selected joins |
+| 14 | Basic query planner | Logical/physical plans and simple cost inputs; select among a small set of valid plans |
+| 15 | Transaction management | Atomicity/consistency and schedules; transaction state and single-process semantics |
+| 16 | Write-ahead logging | Persistence ordering and log records; enforce log-before-data in the declared model |
+| 17 | Crash recovery | Undo/redo/checkpoint theory; deterministic recovery scenarios and documented limits |
+| 18 | Concurrency control | Locks, deadlocks, isolation anomalies; controlled concurrent transaction schedules |
+| 19 | MVCC | Version chains, snapshots, visibility and cleanup; snapshot reads with defined isolation scope |
+| 20 | Query optimization | Equivalence rules, estimates and plan costs; explainable, scoped rewrites |
+| 21 | Client/server protocol | Framing, errors, resource limits and concurrency; local client and server with protocol tests |
+| 22 | Replication | Failure models, ordering, consensus prerequisites; simulation first, then a scoped protocol experiment |
 
-Milestone order refines the supplied report: it separates persistent KV and record storage, adds table/schema integration before SQL execution, and places transaction recovery and concurrency in dependency-aware order. Exact page size, replacement policy, concurrency model, SQL subset, dependencies, and durability claims must be chosen and justified when each milestone is approved.
+Milestone order aligns with the owner's 22-step specification while splitting page storage from page layout/serialization and separating lexer, parser, and AST. It also separates persistent KV and record storage, adds table/schema integration before SQL execution, and places transaction recovery and concurrency in dependency-aware order. Exact page size, replacement policy, concurrency model, SQL subset, dependencies, and durability claims must be chosen and justified before their milestone begins.
 
 ## Real-system study sequence
 
 Study PostgreSQL, SQLite, MySQL/InnoDB, DuckDB, RocksDB, LevelDB, Redis, and FoundationDB as distinct systems. Each study will use current official documentation and verified source locations where needed, and cover purpose, architecture, storage, indexing, query processing, transactions, concurrency, recovery, performance context, trade-offs, and evidence. Select one system only after its relevant concepts have been introduced; do not infer one engine's behavior from another.
 
-## Initial task breakdown
+## Initial task breakdown (superseded by TODO.md)
 
 | Order | Task | Acceptance criteria | Status |
 |---:|---|---|---|
@@ -220,7 +223,7 @@ Study PostgreSQL, SQLite, MySQL/InnoDB, DuckDB, RocksDB, LevelDB, Redis, and Fou
 | 5 | Develop Level 1 fundamentals | Theory/practice objectives, prerequisites, examples and review checks included | NOT STARTED |
 | 6 | Start the first implementation only when its theory prerequisites are ready | Milestone spec defines correctness, scope, validation and expected result before code | NOT STARTED |
 
-The first development task after approval should be selected with the owner. The report recommends deep dives into storage and indexing, while prerequisite sequencing favors foundations and data modeling first. The proposed resolution is to publish the short foundations and relational path, then begin storage theory early enough to support implementation without skipping prerequisites.
+This original assessment queue is retained as project history. Current autonomous execution priorities are maintained in [TODO.md](TODO.md), and per-chapter statuses in [CHAPTER_STATUS.md](CHAPTER_STATUS.md). Work proceeds in prerequisite order without approval pauses between ordinary tasks.
 
 ## Validation and change control
 

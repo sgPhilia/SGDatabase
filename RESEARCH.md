@@ -43,6 +43,16 @@ These checks were performed during the initial assessment to test a few represen
 
 No attempt was made to fully verify each system, paper, benchmark, or performance claim in the PDF. This remains open work.
 
+### Follow-up source verification — foundations (2026-11-11)
+
+For Volume I, original records and direct sources were checked for Codd's relational model paper, Hellerstein/Stonebraker/Hamilton's database architecture survey, Shannon's 1948 communication theory paper, and Huffman's 1952 minimum-redundancy code paper. Official product references were checked for PostgreSQL and SQLite. Full bibliographic metadata and links are in [RESEARCH_INDEX.md](RESEARCH_INDEX.md). This is a small, chapter-scoped update and does not change the overall limitation that a complete bibliography remains unbuilt.
+
+For V01-C04, official references were checked for IEEE 754-2019's scope, UTF-8 in IETF RFC 3629, Unicode code-point/encoding distinctions and UAX #15, and Rust's type/layout/`char`/`str` documentation. The IEEE page confirms the active standard and its scope, but the normative full text was not accessed; the chapter limits claims accordingly. See source records R-012–R-016.
+
+For V01-C05, Linux man-pages were checked for partial-write and `fsync`/directory-sync behavior, Linux kernel documentation for the page cache, and Rust standard-library documentation for file synchronization APIs. These are explicitly presented as Linux/POSIX or Rust API behavior, not universal filesystem guarantees; see R-017–R-020.
+
+For V01-C06, Linux `fork(2)` and `accept(2)` manuals, the current IETF TCP standard RFC 9293, and Rust's `TcpListener` documentation were checked. The chapter distinguishes TCP transport from application framing and database transaction outcomes; see R-021–R-024.
+
 ## Research authority and catalog policy
 
 Use this source priority for claims: original papers/seminal publications; official system documentation; university courses; original source code/design documents; established textbooks; reputable engineering articles; tutorials. A source's authority is claim-specific: official product docs establish documented behavior for a product/version, while an original paper may establish the historical algorithm or theoretical contribution.
