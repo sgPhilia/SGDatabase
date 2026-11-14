@@ -2,36 +2,35 @@
 
 ## Last Session Summary
 
-Completed the requested Initial Assignment: inspected the repository, read the supplied project materials, assessed existing content and Git state, reconciled the textbook architecture and roadmap, established persistent project memory, and recorded the actual chapter/research/implementation counts. The ongoing chapter work in this checkout includes V01-C02 through C06; no changes were made outside the repository and no commits or pushes were made.
+Phase A and Phase B are complete. The user authorized Phase C textbook development on 2026-11-14. C01 and C05 have substantive improvements but remain NEEDS REVIEW because Mermaid parser validation is unavailable. C02–C04 passed their evidence gates and are COMPLETED. Continue in prerequisite order after resolving C05's diagram check; do not advance to C06 until C05 is accepted.
 
 ## Current Repository State
 
-- Branch `main` tracks `origin/main`; commits `a658185` and `55a8043` were present at initial inspection. The working tree was clean before this task.
-- Volume I has 11 stable-ID chapter entries: C01–C05 COMPLETED, C06 DRAFT, C07–C11 NOT STARTED.
-- Six chapter files exist. The 13-volume plan is outlined, but exact chapter counts outside Volume I are not established; 130–175 remains an estimate.
-- There are 24 indexed research records and 22 implementation milestones. No Rust/C++ implementation exists.
-- The persistent state suite, glossary, and concept index are present.
-- Latest local Markdown check covered 24 files and found zero broken relative links or anchors.
+- Initial Phase B checkout was clean at `1aaefeb` on `main`, tracking `origin/main`.
+- Roadmap baseline: 13 volumes, 22 implementation milestones. Volume I has 11 stable chapter IDs and six chapter files.
+- Current chapter statuses: C02–C04 COMPLETED; C01 and C05 NEEDS REVIEW; C06 DRAFT; C07–C11 NOT STARTED.
+- Research index has 34 records (R-001–R-034); mapping is in `RESEARCH_MAP.md`. ARIES record R-032 remains NEEDS REVIEW because primary full-text access was not verified.
+- No engine source, build/test config, lab directory, exercise directory, or CI exists.
 
 ## Last Completed Task
 
-**Initial Assignment — repository assessment, architecture reconciliation, persistent state setup, and initial documentation review.** The findings and proposed continuation are in `PROJECT_STATE.md`, `ROADMAP.md`, `TODO.md`, and `WORK_LOG.md`.
+**C-04 — V01-C04 review and improvement.** Completed with evidence; see QR-011 and W-012. Added objective mapping, primary/official claim citations, source R-033 for binary32/binary64 widths, a reproducible lab, eight assessed exercises, and worked solutions; compiled both Rust examples under Edition 2024. C03 was completed immediately before; see QR-010/W-011. C02 and Phase B evidence is QR-009/W-010 and QR-007/W-008.
 
 ## Current Incomplete Task
 
-**T-006 / V01-C06 — Programs, Processes, and Client–Server Basics.** It remains DRAFT. After the owner approves the next phase, review its technical scope, references, cross-links, exercises, and acceptance criteria before changing its status.
+**C-05 — Complete V01-C05 acceptance.** Content, sources, Rust checks, lab, and six assessed exercises/solutions are recorded in QR-012/W-013. Remaining task: validate both Mermaid diagrams with an actual parser. C01 has a separate unresolved Mermaid parser check.
 
 ## Known Problems
 
-- Volume I Part II navigation is still planned; its first substantive chapter has not been started.
-- Glossary, concept index, research catalog, and future volume chapter maps need continued development.
-- The IEEE normative text was not accessed; C04 limits its claims accordingly.
-- No formal peer review or code validation has been performed; there is no implementation code yet.
+- Curriculum and research maps are planning artifacts; they are not accepted chapter content or claim-level citations.
+- Proposed prerequisite additions require owner review before chapter IDs are assigned.
+- Historical QA/work-log entries report then-current states and must remain immutable; newer entries supersede them for current state.
+- No engine implementation should start until its theory and engineering prerequisites are ready.
 
 ## Immediate Next Action
 
-Wait for the owner's approval to begin the next phase. On approval, resume with focused review and completion of V01-C06.
+Find or make available a Mermaid parser and validate both diagrams in V01-C05; record the exact tool/version and result in QR-012 and the chapter record. Then update C05 consistently to COMPLETED only if the parse passes. Keep C01's separate diagram check open and do not start C06 until C05 is accepted.
 
 ## Resume Instructions
 
-Read `AI_CONTEXT.md`, this file, `PROJECT_STATE.md`, `TODO.md`, `ROADMAP.md`, `CHAPTER_STATUS.md`, `DECISIONS.md`, `WORK_LOG.md`, `RESEARCH_INDEX.md`, and `QUALITY_REPORT.md`. Check Git status before editing. Do not begin the next development phase until the owner approves it. Once approved, resume V01-C06 in `docs/volume-01-foundations/part-01-data-and-computing/` and keep Linux/POSIX behavior scoped to its documented platform.
+Read `AI_CONTEXT.md`, this file, `PROJECT_STATE.md`, `TODO.md`, `ROADMAP.md`, `CHAPTER_STATUS.md`, `DECISIONS.md`, `WORK_LOG.md`, `RESEARCH.md`, `RESEARCH_INDEX.md`, `RESEARCH_MAP.md`, `CURRICULUM_DEPENDENCY_MATRIX.md`, `EDUCATIONAL_STANDARDS.md`, `IMPLEMENTATION_SPECIFICATIONS.md`, and `QUALITY_REPORT.md`. Check Git status. First resolve C05's parser validation when a Mermaid parser is available; do not advance to C06 until C05's acceptance gate passes. Keep C01's separate parser check open.

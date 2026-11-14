@@ -1,6 +1,6 @@
 # LearnDatabase Roadmap
 
-**Status:** Revised textbook plan — IN PROGRESS  
+**Status:** Curriculum scope baseline — maintained; structural architecture work is tracked in `PROGRESS.md`
 **Purpose:** Sequence a university-level, multi-volume database textbook collection, its research, and its parallel engineering track.
 
 ## Proposed repository architecture
@@ -11,6 +11,11 @@ LearnDatabase/
 ├── ROADMAP.md
 ├── PROGRESS.md
 ├── RESEARCH.md
+├── RESEARCH_INDEX.md
+├── RESEARCH_MAP.md
+├── CURRICULUM_DEPENDENCY_MATRIX.md
+├── EDUCATIONAL_STANDARDS.md
+├── IMPLEMENTATION_SPECIFICATIONS.md
 ├── SUMMARY.md
 ├── CONTRIBUTING.md
 ├── docs/
@@ -28,7 +33,8 @@ LearnDatabase/
 │   ├── volume-09-logging-recovery-and-durability/
 │   ├── volume-10-distributed-database-systems/
 │   ├── volume-11-advanced-database-engineering/
-│   └── volume-12-real-world-system-internals/
+│   ├── volume-12-real-world-system-internals/
+│   └── volume-13-build-a-database-from-scratch/
 ├── implementations/
 │   ├── rust/                 # Introduce a Cargo workspace when first crate is approved
 │   ├── cpp/                  # Selective comparisons
@@ -124,9 +130,9 @@ Columnar systems; compression and encoding; vectorization and compilation; in-me
 
 Separate, source-backed studies of PostgreSQL, SQLite, MySQL/InnoDB, DuckDB, RocksDB, LevelDB, Redis, and FoundationDB, plus later systems only when they contribute a distinct architectural lesson. Each study is broken into chapters where architecture, storage, access methods, query/execution, transactions, recovery, operations, and trade-offs warrant separate treatment. Exact source paths and version claims are included only after verification.
 
-### Volume XIII — Building a Database from Scratch (19 milestone chapters plus synthesis)
+### Volume XIII — Building a Database from Scratch (22 milestone specifications plus synthesis)
 
-One chapter per implementation milestone in the engineering roadmap below, with milestone prerequisites, theory references, architecture, data layout, algorithms, coding tasks, correctness properties, tests, expected behavior, limitations, and completion gate. This volume serves as an implementation companion across the theory volumes rather than a shortcut that replaces them.
+One learning unit per implementation milestone in the engineering roadmap below, mapped to the existing 22 milestone specifications. A unit may later split into multiple chapters where needed; do not invent chapter IDs until that decomposition is approved. Each specification identifies prerequisites, theory references, architecture, data layout, algorithms, coding tasks, correctness properties, tests, expected behavior, limitations, and completion gate. This volume serves as an implementation companion across the theory volumes rather than a shortcut that replaces them.
 
 **Initial scope estimate:** approximately 130–175 substantive chapters across thirteen volumes, plus volume introductions, part guides, glossary/index, labs, and solutions. The range follows the number of distinct algorithms, data models, failure semantics, and system studies required by the prompt: for example, B+ tree insertion/deletion/concurrency/recovery each need independent worked treatment, while basic terms can share a foundations chapter. The estimate is deliberately broad and will be recalibrated after full research mapping and early chapter reviews. It is not a target for file count or a cap; splitting or merging chapters must follow learning value.
 
@@ -135,6 +141,8 @@ One chapter per implementation milestone in the engineering roadmap below, with 
 Use volume-prefixed identifiers (`V01-C01`) as stable references even if filenames change. Use descriptive filenames with the ID, e.g. `V01-C01-what-is-data.md`. Volume and part landing pages list chapter titles, prerequisites, status, and next steps. Chapters link to prerequisite concepts, glossary entries, related engineering milestones, and references. The glossary uses one canonical entry per term; alternate names point to it. The concept index maps terms, algorithms, systems, and symbols to chapter anchors. Mathematical notation is introduced in a notation note and defined locally when first used; use GitHub-compatible display math delimited with `$$`. Mermaid diagrams and pseudocode remain text-based and have accompanying prose explanations.
 
 ### Measurable complete-chapter standard
+
+The authoritative status definitions and evidence checklist are in [EDUCATIONAL_STANDARDS.md](EDUCATIONAL_STANDARDS.md). The following summary is retained as the roadmap-level gate; status must be backed by recorded evidence rather than file presence or a prior label.
 
 A chapter may be marked COMPLETED only when all applicable checks below are met and recorded in its status entry:
 
@@ -179,7 +187,7 @@ This is a conceptual dependency map, not a claim that every production engine fo
 
 ## Build-your-own database implementation roadmap
 
-Milestones are deliberately gated by the theory that makes their correctness questions understandable. Each milestone will later receive its own objective, prerequisites, architecture, data structures, algorithms, implementation tasks, tests, correctness criteria, expected output, completion criteria, and further reading. The list is a plan; none is started.
+Milestones are deliberately gated by the theory that makes their correctness questions understandable. Detailed per-milestone specifications are in [IMPLEMENTATION_SPECIFICATIONS.md](IMPLEMENTATION_SPECIFICATIONS.md); the list is a plan and none is started. Cross-volume topic dependencies are recorded in [CURRICULUM_DEPENDENCY_MATRIX.md](CURRICULUM_DEPENDENCY_MATRIX.md).
 
 | # | Milestone | Prerequisite concepts / expected result |
 |---:|---|---|
@@ -223,7 +231,7 @@ Study PostgreSQL, SQLite, MySQL/InnoDB, DuckDB, RocksDB, LevelDB, Redis, and Fou
 | 5 | Develop Level 1 fundamentals | Theory/practice objectives, prerequisites, examples and review checks included | NOT STARTED |
 | 6 | Start the first implementation only when its theory prerequisites are ready | Milestone spec defines correctness, scope, validation and expected result before code | NOT STARTED |
 
-This original assessment queue is retained as project history. Current autonomous execution priorities are maintained in [TODO.md](TODO.md), and per-chapter statuses in [CHAPTER_STATUS.md](CHAPTER_STATUS.md). Work proceeds in prerequisite order without approval pauses between ordinary tasks.
+This original assessment queue is retained as historical context. Current tasks are in [TODO.md](TODO.md); stable chapter IDs and statuses are in [CHAPTER_STATUS.md](CHAPTER_STATUS.md). Follow the active user instruction for phase boundaries; do not infer authorization to begin a later major phase from this roadmap.
 
 ## Validation and change control
 

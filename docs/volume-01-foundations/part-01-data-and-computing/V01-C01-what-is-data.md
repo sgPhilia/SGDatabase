@@ -1,11 +1,11 @@
 # V01-C01 — What Is Data? From Observations to Stored Representations
 
-**Volume:** I — Data, Computing, and Database Foundations  
-**Part:** I — Data and Computing  
-**Status:** COMPLETED  
-**Prerequisites:** None  
+**Volume:** I — Data, Computing, and Database Foundations
+**Part:** I — Data and Computing
+**Status:** NEEDS REVIEW
+**Prerequisites:** None
 **Next:** [V01-C02 — Meaning, Models, and Information](V01-C02-meaning-models-information.md)
-**Glossary:** [Canonical terms](../../../glossary.md)  
+**Glossary:** [Canonical terms](../../../glossary.md)
 **Concept index:** [Index](../../../INDEX.md)
 
 ## Learning objectives
@@ -18,6 +18,17 @@ After studying this chapter, you should be able to:
 4. Explain why storing data requires explicit choices about types, units, identity, missingness, and time.
 5. Identify ways that a representation can lose information or cause an incorrect interpretation.
 6. Describe why persistent data management becomes difficult when information is large, shared, evolving, or safety-critical.
+
+Objective-to-assessment mapping appears in [Section 12](#12-exercises-and-assessment); model answers and grading criteria are in the separate [solution guide](solutions/V01-C01-solutions.md).
+
+| Objective | Primary evidence |
+|---|---|
+| 1. Explain data, information, representation, interpretation | Exercises 1 and 3 |
+| 2. Trace observation through representation to result | Exercises 1 and 2 |
+| 3. Distinguish value/encoding, field/meaning, database/DBMS | Exercises 1 and 4 |
+| 4. Explain type, units, identity, missingness, and time choices | Exercises 2 and 3 |
+| 5. Identify information loss and misinterpretation | Exercises 2 and 3 |
+| 6. Explain persistent data-management difficulty | Exercise 4 and the practical experiment |
 
 ## 1. A starting point: a value is not yet a useful record
 
@@ -70,6 +81,8 @@ A **schema** is a declared description of some data's structure and rules. A sch
 
 Schemas are not merely paperwork. They help software reject invalid values, choose operations, and communicate expectations between independently written components. A schema is also not a complete description of reality: it records selected aspects of the world for a purpose. If an observation's real precision is only about one degree, storing six decimal places does not create six decimal places of measurement accuracy.
 
+It is useful to distinguish a **schema** from a **database state**. The schema describes the allowed shape and rules; a state is the particular set of values held at one time. A schema can say that `temperature_c` is a decimal measurement and that `station_id` identifies a station. It cannot, by itself, establish that the sensor was calibrated or that a producer used Celsius. A constraint can reject values outside a declared range, but a value inside the range can still be wrong. Syntactic validity, declared-rule validity, and truth about the world are different questions.
+
 ## 3. From the world to bits and back
 
 A database ultimately relies on physical devices and software representations. The path from an event in the world to a query result has several conceptual stages:
@@ -87,6 +100,10 @@ flowchart LR
 ```
 
 Every transformation is a possible place for error. A Fahrenheit value may be placed in a Celsius field; a local wall-clock time may be treated as a universal instant; a decimal may be rounded to binary floating point; a string may be truncated; a byte sequence may be decoded using the wrong character encoding; a query may silently exclude missing values.
+
+We can describe the path without assuming that each stage is reversible. Let `O` be a set of possible real-world states, `X` a set of observations, `V` a set of application values, and `B*` the set of finite byte strings. A sensor or reporting process maps some world states to observations, `s: O ⇀ X`; an encoder maps supported values to bytes, `e: V → B*`; a decoder maps recognized byte strings back to values, `d: B* ⇀ V`; and an interpretation rule maps a decoded value plus schema and context to a claim, `i: V × Schema × Context ⇀ Claim`. The hooked arrow indicates a partial function: some inputs may be unsupported, missing, malformed, or ambiguous. A lossless encoding aims for `d(e(v)) = v` for every supported value `v`. That round trip says nothing by itself about whether the observation was accurate or whether the schema and context were correct. Sampling, rounding, unit conversion, filtering, and missing-value policies can discard distinctions before bytes are stored.
+
+For example, if temperature is rounded to the nearest tenth before storage, distinct sensor readings may map to the same stored value. No decoder can recover which original reading occurred from the rounded value alone. This is information loss in the chosen transformation, not necessarily a storage defect: rounding may be appropriate if it matches measurement precision and application requirements. The engineering requirement is to state where loss occurs and why it is acceptable.
 
 Later volumes study specific representations in detail. For now, keep these layers separate:
 
@@ -136,13 +153,13 @@ Technical writing sometimes uses *database* to mean the stored collection, and s
 - A **database management system (DBMS)** is software that defines, stores, retrieves, updates, and manages databases, while providing interfaces and rules for users or programs.
 - A **database system** is the combination of a DBMS, the databases it manages, client programs, and the operating environment needed to use them.
 
-Different products use these words differently. For example, PostgreSQL uses *database cluster* for a collection of databases managed under a shared data area; its server process accepts client connections. In SQLite, an application uses a library to operate on a database file, so the boundary between application and database engine looks different. These examples are product-specific; neither defines the universal meaning of DBMS.
+Different products use these words differently. For example, PostgreSQL 18 documentation defines a database cluster as a collection of databases stored in a common data area and states that a running server instance handles client connections through server processes [R-005]. SQLite's official guidance describes a different design center: local application storage through an embedded engine and database file, with client/server systems favored for different sharing and centralization needs [R-006]. These examples are product- and version-specific; neither defines the universal meaning of DBMS, and SQLite's guidance is not a general workload-selection theorem.
 
 The logical distinction remains useful: the **data** is not the same thing as the **software that manages it**. Losing the distinction is like confusing a document with the word processor that edits it, though databases add concurrency, recovery, query, and integrity machinery that makes the analogy incomplete.
 
 ## 6. What a DBMS contributes
 
-A DBMS typically brings together several capabilities. The exact division of components differs across systems, but the responsibilities recur:
+A DBMS typically brings together several capabilities. Database architecture surveys describe different process, storage, transaction, and query-processing designs rather than one universal module layout [R-002]. The following is a teaching map of recurring responsibilities, not a claim that every system implements each one:
 
 | Responsibility | Question the system helps answer |
 |---|---|
@@ -163,7 +180,7 @@ This table is a conceptual map, not a claim that every DBMS implements each resp
 
 Database systems grew from the need to manage persistent, structured data, especially when data volumes and the number of users exceeded what ad hoc files and individual programs could comfortably support. Early systems commonly exposed navigational structures: an application followed predefined links or access paths through records. Such approaches can be efficient, but application logic may depend on how records are physically arranged or connected.
 
-In 1970, Edgar F. Codd published “A Relational Model of Data for Large Shared Data Banks.” The paper argued for a data model based on relations and for insulating users and many application programs from changes in internal representation. It also introduced relational operations and discussed redundancy and consistency. This did not instantly replace existing systems; relational ideas required years of theory, prototypes, commercial products, language development, and engineering before broad adoption.
+In 1970, Edgar F. Codd published “A Relational Model of Data for Large Shared Data Banks.” Its abstract argues that users and most application programs should not have to know the machine's internal data organization, and introduces a model based on n-ary relations, a relational normal form, and a data sublanguage; it also discusses relational operations in connection with redundancy and consistency [R-001]. This describes the paper's proposal, not a claim that every later relational DBMS implements every idea as Codd formulated it. Relational ideas required further theory, prototypes, commercial products, language development, and engineering before broad adoption.
 
 The lasting lesson for this introductory chapter is not that one model solved every data problem. It is that a data model can create a boundary between how users describe data and how an engine physically stores it. Later books will compare relational, document, key-value, graph, columnar, and other models, and will show where abstractions help or impose constraints.
 
@@ -234,7 +251,7 @@ Precision of representation is not the same as accuracy of measurement. Storing 
 
 ## 11. Practical experiment: make meaning explicit
 
-Create a small table or CSV containing observations from a familiar domain: books, meals, exercise sessions, or weather. For each field, write down:
+Create a small table or CSV containing at least six observations from a familiar domain: books, meals, exercise sessions, or weather. Include at least one missing value, one unit-bearing measurement, and one identifier. For each field, write down:
 
 1. Field name and intended meaning.
 2. Type and allowed values.
@@ -243,7 +260,13 @@ Create a small table or CSV containing observations from a familiar domain: book
 5. Identifier or relationship rules.
 6. One invalid example and how a consumer should detect it.
 
-Then ask a second person to interpret the data without extra verbal explanation. Record mismatches. This experiment tests whether meaning was captured in the schema and documentation instead of remaining only in the author's head.
+Then ask a second person to interpret the data using only the artifact. Record each mismatch, the missing convention that caused it, and a proposed schema or documentation change. Repeat the interpretation after revising the artifact. The experiment succeeds when the reader can explain each field's meaning, units, missingness, and identifier scope; agreement does not prove that the observations themselves are true.
+
+**Deliverables:** data file or table, data dictionary, one invalid example per field, initial and revised reader interpretations, and a short change log.
+
+**Verification:** a reader who did not design the dataset checks every field without oral hints; inspect the artifact to confirm each assumption needed to interpret the rows is written down.
+
+**Assessment:** use Exercise 3's rubric in the [solution and grading guide](solutions/V01-C01-solutions.md). The guide supplies example evidence, not a single required domain model.
 
 ### Reflection questions
 
@@ -252,30 +275,90 @@ Then ask a second person to interpret the data without extra verbal explanation.
 3. If an amount is stored as a decimal string, what conventions must a reader know?
 4. Which assumptions in your data description belong to the domain, and which belong to a specific DBMS?
 
-## 12. Summary
+## 12. Exercises and assessment
+
+The exercises assess the learning objectives rather than recall alone. Complete guidance and grading criteria are in the separate [V01-C01 solution and grading guide](solutions/V01-C01-solutions.md).
+
+### Exercise 1 — Trace representation and interpretation
+
+- **Level:** 2 — Application
+- **Objectives:** 1, 2, 3
+- **Prerequisites:** Sections 2–3
+- **Tools:** None
+- **Problem:** A file contains `ST-07,2026-11-11T09:00:00+07:00,18.4,accepted`. Identify a valid interpretation for each field, then give two different interpretations that remain possible until additional conventions are specified.
+- **Tasks:** Trace the path from observation to displayed result; name one assumption at each transformation.
+- **Deliverable:** Four-field data dictionary, interpretation trace, and two unresolved assumptions.
+- **Expected result:** Separate syntax from meaning; successful parsing does not prove `18.4` is Celsius or that the observation is accurate.
+- **Assessment:** 10 points: 4 for field meanings and types, 3 for a complete trace, 2 for distinct plausible assumptions, 1 for stating a limit.
+
+### Exercise 2 — Find information loss
+
+- **Level:** 3 — Analysis
+- **Objectives:** 2, 4, 5
+- **Prerequisites:** Sections 3 and 9
+- **Tools:** Calculator optional
+- **Problem:** A producer records temperature to hundredths of a degree, exports a value rounded to the nearest whole degree, then a consumer stores that integer as a floating-point value displayed with six decimal places.
+- **Tasks:** Identify which distinctions are lost, which apparent precision is introduced only at presentation, and one condition under which the rounding could still be acceptable.
+- **Deliverable:** Stage-by-stage loss table and a 100–200 word rationale.
+- **Expected result:** Whole-degree rounding is lossy; formatting six decimal places cannot recover discarded hundredths or establish measurement accuracy.
+- **Assessment:** 10 points: 4 for locating loss correctly, 2 for distinguishing precision from accuracy, 2 for a coherent acceptability condition, 2 for a traceable explanation.
+
+### Exercise 3 — Design and test a small data dictionary
+
+- **Level:** 4 — Design
+- **Objectives:** 1, 3, 4, 5, 6
+- **Prerequisites:** Sections 2, 4, and 9; practical experiment instructions
+- **Tools:** Spreadsheet or text editor; one independent reader
+- **Problem:** Complete the practical experiment with six or more rows and an independent reader.
+- **Tasks:** Define fields, units, identifier scope, allowed values, missingness, and one invalid example per field. Record one reader misunderstanding and revise the artifact.
+- **Deliverable:** Dataset, data dictionary, invalid examples, reader notes, revised artifact, and change log.
+- **Expected result:** A reader can explain the conventions from the artifact; remaining ambiguity is listed. The exercise does not establish truth or measurement validity.
+- **Assessment:** 20 points: 5 for dictionary completeness, 4 for meaningful invalid cases, 4 for reader-test evidence, 4 for a justified revision, 3 for stating remaining limits.
+
+### Exercise 4 — Select a storage boundary for a workload
+
+- **Level:** 3 — Analysis
+- **Objectives:** 3, 6
+- **Prerequisites:** Sections 4–6 and the SQLite discussion in Section 5
+- **Tools:** Official SQLite and PostgreSQL 18 guidance in R-006 and R-005; no software setup required
+- **Problem:** A field team needs offline data capture on individual devices, followed by synchronization to a shared reporting service. Consider an embedded database at the edge and a client/server DBMS for centralized sharing.
+- **Tasks:** Identify which responsibilities belong at each boundary, name two requirements that determine the design, and describe one consistency or failure question that remains unresolved.
+- **Deliverable:** A one-page boundary diagram plus a 250–400 word rationale citing the product guidance used and its limits.
+- **Expected result:** The proposal distinguishes local storage from centralized coordination and treats product documentation as a source about that product, not proof that one architecture is universally superior.
+- **Assessment:** 15 points: 4 for a clear boundary, 4 for workload-based requirements, 3 for a concrete failure/consistency question, 2 for source use, 2 for an explicit limitation.
+
+## 13. Summary
 
 Data consists of represented values interpreted through shared conventions. Schemas make some of those conventions explicit by naming fields, types, constraints, and relationships, but a schema is still a model of selected aspects of reality. Data passes through semantic, logical, program, physical, and presentation layers, and every conversion can lose or distort meaning.
 
 Persistent information becomes difficult to manage when it must be searched, shared, validated, changed over time, protected, or recovered after failure. A DBMS packages capabilities for defining and manipulating data, storing it, enforcing rules, coordinating concurrent work, and recovering from failures. Products differ in how they provide these capabilities. The first engineering task is to be precise about what is being represented and which properties the system must preserve.
 
-## Further reading
+## 14. Further reading
 
-- Edgar F. Codd, “A Relational Model of Data for Large Shared Data Banks” (1970): motivation for a relational model and independence from physical representation.
-- Joseph M. Hellerstein, Michael Stonebraker, and James Hamilton, “Architecture of a Database System” (2007): broad overview of the responsibilities and design alternatives inside DBMSs.
-- PostgreSQL documentation, “What Is PostgreSQL?” and server process documentation: a concrete client/server system and its terminology.
-- SQLite, “Appropriate Uses For SQLite”: a primary-source discussion of embedded database use cases and workload trade-offs.
+- Edgar F. Codd, “A Relational Model of Data for Large Shared Data Banks” (1970): foundational proposal for a relational model and data independence [R-001].
+- Joseph M. Hellerstein, Michael Stonebraker, and James Hamilton, “Architecture of a Database System” (2007): overview of architectural responsibilities and design alternatives [R-002].
+- PostgreSQL 18 server application documentation: product-specific cluster and connection-process terminology [R-005].
+- SQLite, “Appropriate Uses For SQLite”: product guidance about embedded use cases and workload trade-offs [R-006].
 
-## References
+## 15. References and claim scope
 
-1. Codd, E. F. (1970). “A Relational Model of Data for Large Shared Data Banks.” *Communications of the ACM*, 13(6), 377–387. [IBM Research publication record](https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks). Historical source; supports the stated motivation and relational-model contribution.
-2. Hellerstein, J. M., Stonebraker, M., & Hamilton, J. (2007). “Architecture of a Database System.” *Foundations and Trends in Databases*, 1(2), 141–259. [DOI: 10.1561/1900000002](https://doi.org/10.1561/1900000002). Survey; supports the functional map of DBMS components, not a universal implementation template.
-3. PostgreSQL Global Development Group. [About PostgreSQL](https://www.postgresql.org/about/) and [The PostgreSQL Server Application](https://www.postgresql.org/docs/current/app-postgres.html). Official documentation; product-specific terminology and current server behavior, accessed 2026-11-11.
-4. SQLite Consortium. [Appropriate Uses For SQLite](https://www.sqlite.org/whentouse.html). Official documentation; product-specific use guidance, accessed 2026-11-11.
+1. **R-001 — Primary research.** Codd, E. F. (1970). “A Relational Model of Data for Large Shared Data Banks.” *Communications of the ACM*, 13(6), 377–387. [IBM Research publication record](https://research.ibm.com/publications/a-relational-model-of-data-for-large-shared-data-banks). Record and abstract accessed 2026-11-14; full article access was not checked in this review. Supports the paper's stated motivation and proposal, not all modern relational-system behavior.
+2. **R-002 — Academic survey.** Hellerstein, J. M., Stonebraker, M., & Hamilton, J. (2007). “Architecture of a Database System.” *Foundations and Trends in Databases*, 1(2), 141–259. [Publisher/DOI record](https://doi.org/10.1561/1900000002). Metadata and abstract accessed 2026-11-14; full article is paywalled at the publisher. The abstract supports the breadth of architectural subjects and use of multiple systems as examples; this chapter's table is an introductory synthesis, not a quotation or exhaustive claim from the survey.
+3. **R-005 — Official product documentation.** PostgreSQL Global Development Group. [PostgreSQL 18 `postgres` server application](https://www.postgresql.org/docs/18/app-postgres.html). Accessed 2026-11-14. Supports the version-scoped cluster and server-process statements; not generalized to all DBMSs.
+4. **R-006 — Official product documentation.** SQLite Consortium. [Appropriate Uses For SQLite](https://www.sqlite.org/whentouse.html). Accessed 2026-11-14. Supports SQLite's own guidance about embedded/local use and client/server contrast; it is not a universal workload-selection rule.
 
-## Chapter review record
+## 16. Chapter review and acceptance record
 
-- Structure and objectives: checked against the textbook chapter standard.
-- Concept progression: checked from data representation toward DBMS responsibilities.
-- References: bibliographic records and direct links included for cited claims; product-specific claims labeled.
-- Diagrams: one conceptual representation pipeline; no binary-layout diagram is claimed at this introductory level.
-- Remaining limits: this chapter introduces rather than formally defines information theory, relational algebra, storage encodings, or DBMS guarantees; those subjects are developed in later chapters.
+- **Review date:** 2026-11-14 (Asia/Bangkok).
+- **Reviewer:** Internal authoring review; no independent external peer review is implied.
+- **Objectives and assessment:** Objectives 1–6 map to Exercises 1–4 and the practical experiment; model answers and rubrics are linked separately.
+- **Technical claims and research:** Codd's historical claim maps to R-001; architecture framing maps to R-002 with the full-text access limitation; PostgreSQL and SQLite statements are product/version scoped to R-005/R-006. Schema validity versus truth is a stated modeling principle, not an empirical claim.
+- **Mathematics:** Partial-function notation and the lossless round-trip condition are defined locally; no numerical derivation is required. Exercise 2's rounding claim follows directly from the specified transformation.
+- **Examples and engineering:** No code examples; implementation is not applicable. The experiment defines inputs, deliverables, an independent-reader procedure, observable success, and limitations.
+- **Exercises and solutions:** Four varied exercises include objectives, prerequisites, instructions, deliverables, expected results, and point-based rubrics. Worked guidance is provided separately in `solutions/V01-C01-solutions.md`.
+- **Navigation and cross-references:** Stable ID, volume/part, prerequisites, next chapter, glossary, concept index, research index, and solution guide links checked.
+- **Diagram:** Data-path meaning reviewed. Mermaid CLI/parser is unavailable in the current environment, so syntax validation remains open.
+- **Editorial review:** Terms, progression, examples, claims, and scope caveats reviewed against the curriculum matrix and acceptance standards.
+- **Validation:** Markdown links/anchors, fences, objective-to-exercise mapping, rubric arithmetic, and worked outputs checked; see `QUALITY_REPORT.md` QR-008. Mermaid parser validation remains open.
+- **Open issue:** Run the Mermaid block through a Mermaid parser before acceptance.
+- **Status:** NEEDS REVIEW. This internal review is not external peer review.

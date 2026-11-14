@@ -85,3 +85,31 @@ Maintain two views: a short, dependency-ordered Core Reading Path and a topic-fi
 ## Research limitations
 
 The initial assessment relies on one supplied synthesis report and a small official-documentation spot-check. There is not yet enough verified evidence to call the provided source set comprehensive or authoritative. No findings in this document should be read as an exhaustive literature review.
+
+## Phase B verification and curriculum map (2026-11-14)
+
+Records R-025–R-032 were added for a current university course syllabus, a textbook metadata page, and foundational work on query optimization, isolation, LSM trees, consensus, columnar systems, and recovery. The checked source type, bibliographic facts, claim scope, curriculum mapping, implementation mapping, and access limitations are recorded in [RESEARCH_INDEX.md](RESEARCH_INDEX.md) and [RESEARCH_MAP.md](RESEARCH_MAP.md). The mapping is a planning artifact; source association alone does not establish that a chapter claim is correct.
+
+Direct accessibility was checked for the CMU course syllabus and the full paper copies cited for System R, isolation levels, LSM trees, Raft, and C-Store. The *Database System Concepts* author resource page was checked for edition and publication metadata; the book text was not accessed in this check. ARIES bibliographic metadata was cross-checked through DBLP, but the ACM DOI endpoint returned an access error and no full text was accessed; R-032 remains NEEDS REVIEW. The LSM full text was accessed from a university host while publisher-version access was not checked. These limits are retained per record rather than generalized to the whole catalog.
+
+`RESEARCH_MAP.md` maps the current R-001–R-034 catalog to claim areas, planned topics, existing chapter IDs where assigned, and implementation components. Full claim-level citation mapping still belongs in each chapter when written. The mapping flags research gaps rather than treating the catalog as comprehensive.
+
+### Phase C source verification — V01-C01 (2026-11-14)
+
+The IBM Research record for Codd (R-001) was accessed and its abstract checked for the specific claim about user/application insulation from internal representation and its relational-model proposal; this review did not access the complete CACM article. The publisher/DOI record for Hellerstein, Stonebraker, and Hamilton (R-002) provided bibliographic metadata and an abstract naming the survey's process, storage, transaction, and query-processor scope, but the full article is paywalled. PostgreSQL 18's official `postgres` documentation (R-005) was accessed for cluster and connection-process wording. SQLite's official appropriate-uses page (R-006) was accessed for its local/embedded and client/server discussion; its workload recommendations are treated as product guidance. These sources support only the claims scoped to them in C01; none establishes universal DBMS architecture or guarantees.
+
+### Phase C source verification — V01-C02 (2026-11-14)
+
+The Harvard-hosted 55-page scan of Shannon's 1948 paper (R-003) was opened and its introduction checked for Shannon's explicit decision to set semantic aspects aside in the communication engineering problem, and for the base-2 unit discussion. The bibliographic record confirms the Bell System Technical Journal volume and page ranges. The fair-coin calculation in C02 was independently checked under the stated equal-probability model. The IBM Research record and abstract for Codd (R-001) were also accessed; the chapter limits its historical claim to the proposal stated there and does not imply complete full-text review. The research index and map now record the access scope and date.
+
+### Phase C source verification — V01-C03 (2026-11-14)
+
+The complete Harvard-hosted scan of Shannon's 1948 paper (R-003) was accessed as recorded during C02 review. For C03, the Stanford-hosted full paper copy of Huffman's 1952 paper (R-011) was opened and bibliographic metadata cross-checked; the DOI endpoint itself was unavailable in this check. The chapter uses Shannon for source entropy/coding context and Huffman for its finite-alphabet binary prefix construction and stated minimum-redundancy result. These primary papers do not establish database-specific end-to-end compression savings; the chapter treats the fixed-sequence exercise as payload arithmetic and labels excluded costs. Independently calculated examples are recorded in QR-010.
+
+### Phase C source verification — V01-C04 (2026-11-14)
+
+Rechecked IEEE's official IEEE 754-2019 record, which confirms the active standard and its scope but does not expose the full normative text (R-012). Accessed IETF RFC 3629 (R-013), Unicode 18.0.0 Chapter 1 (R-014), and Unicode Standard Annex #15 revision 58 (R-015). Rechecked Rust's official Reference pages for types, layout, and integer operators plus the standard-library `char`, `str`, and `f64` documentation (R-016; docs report Rust 1.100.0 where versioned). Accessed Oracle's Java SE 26 JVM specification §2.3.2 (R-033) to confirm the binary32/binary64 association and field parameters within JVM scope. C04 cites each source only for claims it directly supports; the normative IEEE access limit is disclosed in the chapter.
+
+### Phase C source verification — V01-C05 (2026-11-14)
+
+Rechecked the Linux man-pages 6.19 text for `read(2)` (R-034), `write(2)` (R-017), and `fsync(2)` (R-018), plus Linux kernel page-cache documentation (R-019). Accessed the Rust 1.100.0 `File`, `Read`, and `Write` documentation (R-020). These sources support only the named Linux/POSIX and Rust API behaviors. The chapter does not extrapolate a call's API-level completion to all hardware or failure models; no power-loss test was performed.

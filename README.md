@@ -4,7 +4,7 @@ SGDatabase is the repository for LearnDatabase: a research-backed, university-le
 
 ## Current state
 
-The initial repository assessment is complete, the textbook-scale structure is established, and Volume I is underway. Read [AI_CONTEXT.md](AI_CONTEXT.md) to resume work, [SESSION_HANDOFF.md](SESSION_HANDOFF.md) for the next action, and [PROGRESS.md](PROGRESS.md) for high-level status.
+Phase A and Phase B are complete. Phase C textbook development is in progress; V01-C02–C04 have passed the evidence policy. C01 and C05 remain under review pending Mermaid syntax validation. Read [AI_CONTEXT.md](AI_CONTEXT.md) and [SESSION_HANDOFF.md](SESSION_HANDOFF.md) to resume, [PROGRESS.md](PROGRESS.md) for high-level status, and [PROJECT_STATE.md](PROJECT_STATE.md) for derived counts.
 
 ## Learning approach
 
@@ -26,6 +26,10 @@ The path begins with computer and data foundations, proceeds through relational 
 - `diagrams/` — editable Mermaid diagrams used by the curriculum.
 - `AI_CONTEXT.md`, `PROJECT_STATE.md`, `SESSION_HANDOFF.md`, `TODO.md`, `WORK_LOG.md`, `DECISIONS.md`, `CHAPTER_STATUS.md`, `RESEARCH_INDEX.md`, `QUALITY_REPORT.md` — persistent project memory and operational records.
 - `ROADMAP.md`, `PROGRESS.md`, `RESEARCH.md`, `SUMMARY.md` — authoritative plan, high-level status, research method, and project overview.
+- `CURRICULUM_DEPENDENCY_MATRIX.md` — topic-level prerequisites and mappings across the 13-volume curriculum.
+- `RESEARCH_MAP.md` — research-source, claim, topic, chapter, and implementation mapping.
+- `EDUCATIONAL_STANDARDS.md` — measurable chapter acceptance and exercise/lab templates.
+- `IMPLEMENTATION_SPECIFICATIONS.md` — specifications for the existing 22 implementation milestones.
 
 The first textbook chapter is in `docs/volume-01-foundations/`. The remaining structure will be added as substantive chapters are approved; empty chapter placeholders are not used.
 

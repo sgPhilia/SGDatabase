@@ -5,6 +5,10 @@ SGDatabase is the repository for **LearnDatabase**, owned by **sgPhilia**: a lon
 ## Authoritative state
 
 - Planned scope and prerequisites: [ROADMAP.md](ROADMAP.md) (authoritative).
+- Topic-by-topic dependencies: `CURRICULUM_DEPENDENCY_MATRIX.md` (derived map; it does not assign new chapter IDs).
+- Research claims-to-curriculum links: `RESEARCH_MAP.md`; bibliographic records remain in [RESEARCH_INDEX.md](RESEARCH_INDEX.md).
+- Chapter acceptance and exercise/lab standards: `EDUCATIONAL_STANDARDS.md`.
+- Per-milestone engineering specs: `IMPLEMENTATION_SPECIFICATIONS.md`.
 - High-level status: [PROGRESS.md](PROGRESS.md) (authoritative).
 - Exact chapter registry and component status: [CHAPTER_STATUS.md](CHAPTER_STATUS.md).
 - Detailed actual counts, priorities, issues: [PROJECT_STATE.md](PROJECT_STATE.md).
@@ -23,4 +27,4 @@ Inspect `git status` and relevant files before editing. Research primary sources
 
 ## Current project snapshot
 
-At the last inspection in the 2026-11-11 session, branch `main` tracked `origin/main`, recent commits were `a658185` and `55a8043`, and the working tree was clean before this work. There is no implementation crate. Volume I has five completed chapters (V01-C01 through C05); V01-C06 is a draft. The requested Initial Assignment is complete; wait for the owner's approval before beginning the next phase. See `SESSION_HANDOFF.md` for the exact resume instruction.
+At Phase B start on 2026-11-14, `main` tracked `origin/main` at `1aaefeb` and the tree was clean; Phase B and Phase C edits remain uncommitted. Phase B structural deliverables are complete; Phase C textbook development is authorized and IN PROGRESS. V01-C02–C04 passed their acceptance gates (QR-009–QR-011). V01-C01 and C05 remain NEEDS REVIEW pending Mermaid parser validation. Current task: validate the two C05 diagrams with a parser, then proceed to C06 only if C05 passes. No implementation crate exists. See `SESSION_HANDOFF.md` for exact resumption instructions.

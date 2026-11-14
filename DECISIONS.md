@@ -60,3 +60,34 @@ Significant decisions are recorded here. Superseded decisions remain in the log 
 - **Context:** The roadmap has a 130–175 chapter estimate but only Volume I titles are currently enumerated.
 - **Decision:** `PROJECT_STATE.md` and `CHAPTER_STATUS.md` count only stable-ID chapter entries actually in the roadmap/registry. Treat 130–175 as an uncommitted complexity estimate.
 - **Consequence:** Do not report exact total planned chapters until the remaining volume outlines are decomposed.
+
+## ADR-008 — Chapter acceptance requires recorded evidence
+
+- **Date:** 2026-11-14
+- **Status:** Accepted for Phase B
+- **Context/problem:** Existing COMPLETED labels were not consistently backed by solutions/grading guidance and chapter-level acceptance evidence; C05's prior QA record explicitly said draft review only.
+- **Decision:** Apply a measurable acceptance policy before marking or retaining COMPLETED. Existing C01–C05 are set to NEEDS REVIEW pending policy review; C06 remains DRAFT. Status transitions require evidence in the chapter and `QUALITY_REPORT.md`.
+- **Consequences:** Historical status claims remain in append-only logs, while current status is conservative. Chapter count of accepted material is zero until the review gates are met.
+
+## ADR-009 — Status sources of truth
+
+- **Date:** 2026-11-14
+- **Status:** Accepted
+- **Decision:** `ROADMAP.md` owns planned scope and milestone baseline; `CHAPTER_STATUS.md` owns individual chapter status; `PROGRESS.md` owns phase/workstream status; `PROJECT_STATE.md` contains derived counts and open issues; `QUALITY_REPORT.md` records checks; `TODO.md` owns active tasks; `SESSION_HANDOFF.md` owns immediate resume instructions. `SUMMARY.md` is descriptive and must not become a competing status ledger.
+- **Consequences:** Repeated counts are derived and reconciled. Historical WORK_LOG/QUALITY_REPORT entries are not rewritten; corrections are recorded in new entries.
+
+## ADR-010 — Preserve 22 implementation milestones as the baseline
+
+- **Date:** 2026-11-14
+- **Status:** Accepted
+- **Context/problem:** ROADMAP.md stated 19 milestone chapters while defining 22 implementation milestones.
+- **Decision:** Keep the 22 milestone baseline. Treat them as learning units/specifications rather than claiming one finalized chapter per milestone; any later chapter split requires curriculum review and stable-ID assignment.
+- **Consequences:** Volume XIII scope wording is corrected; detailed specifications remain in `IMPLEMENTATION_SPECIFICATIONS.md`.
+
+## ADR-011 — Define IN PROGRESS as an active chapter status
+
+- **Date:** 2026-11-14
+- **Status:** Accepted
+- **Context/problem:** The chapter registry allowed IN PROGRESS, but the educational acceptance policy did not define the status or its transition rules.
+- **Decision:** IN PROGRESS means active authoring or substantive revision, not ready for acceptance review. Move to DRAFT when a coherent reviewable draft exists, or NEEDS REVIEW when focused review identifies evidence gaps. Keep per-chapter status authoritative in `CHAPTER_STATUS.md`.
+- **Consequences:** The acceptance standard, progress definitions, and curriculum status key now share this meaning. C02 used IN PROGRESS during substantive revision, then moved to COMPLETED after QR-009 evidence; C01 remains NEEDS REVIEW due its open diagram check.
